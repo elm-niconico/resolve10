@@ -1,0 +1,41 @@
+{
+  "name": "resolve10",
+  "private": true,
+  "version": "0.1.0",
+  "description": "",
+  "scripts": {
+    "postinstall": "npm run build",
+    "build": "rimraf ./script && tsc && akashic-cli-scan asset script",
+    "build-watch": "tsc --watch",
+    "generate-font": "bmpfont-generator ./buildscripts/nicokaku_v1.ttf ./buildscripts/nicokaku.png -F #fff -H 100 --stroke-width 3 -S #000000",
+    "generate-font2": "bmpfont-generator ./buildscripts/ipaexg.ttf ./buildscripts/ipa.png -F #fff -H 70 --stroke-width 1 -S #000000",
+    "update": "akashic-cli-scan asset && akashic-cli-scan globalScripts",
+    "lint": "eslint -c .eslintrc.js \"src/**/*.ts\" --fix",
+    "start": "akashic-sandbox .",
+    "export-zip": "rimraf game.zip && akashic-cli-export zip -o game.zip -s",
+    "export-html": "rimraf ./resolve10.zip && akashic export html -o ./resolve10.zip --atsumaru",
+    "test": "jest"
+  },
+  "author": "",
+  "license": "",
+  "devDependencies": {
+    "@akashic/akashic-cli-export": "1.7.43",
+    "@akashic/akashic-cli-scan": "0.15.37",
+    "@akashic/akashic-engine": "~3.4.0",
+    "@akashic/akashic-sandbox": "~0.17.35",
+    "@types/jest": "27.5.1",
+    "@types/node": "16.11.26",
+    "@typescript-eslint/eslint-plugin": "5.26.0",
+    "@typescript-eslint/parser": "5.26.0",
+    "eslint": "8.16.0",
+    "eslint-plugin-import": "2.26.0",
+    "jest": "28.1.0",
+    "rimraf": "3.0.2",
+    "ts-jest": "28.0.2",
+    "typescript": "4.6.4"
+  },
+  "dependencies": {
+    "@types/rx": "^4.1.2",
+    "rx": "^4.1.0"
+  }
+}

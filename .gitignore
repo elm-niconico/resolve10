@@ -1,0 +1,7 @@
+node_modules
+/script
+coverage
+/.idea/
+/image/
+/audio/
+/resolve10.zip/

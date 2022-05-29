@@ -1,0 +1,206 @@
+{
+	"width": 900,
+	"height": 720,
+	"fps": 30,
+	"main": "./script/_bootstrap.js",
+	"assets": {
+		"player": {
+			"type": "image",
+			"width": 32,
+			"height": 32,
+			"path": "image/player.png"
+		},
+		"shot": {
+			"type": "image",
+			"width": 16,
+			"height": 16,
+			"path": "image/shot.png"
+		},
+		"se": {
+			"type": "audio",
+			"path": "audio/se",
+			"systemId": "sound",
+			"duration": 250
+		},
+		"_bootstrap": {
+			"type": "script",
+			"path": "script/_bootstrap.js",
+			"global": true
+		},
+		"main": {
+			"type": "script",
+			"path": "script/main.js",
+			"global": true
+		},
+		"parameterObject": {
+			"type": "script",
+			"path": "script/parameterObject.js",
+			"global": true
+		},
+		"game": {
+			"type": "script",
+			"path": "script/game.js",
+			"global": true
+		},
+		"entityHelper": {
+			"type": "script",
+			"path": "script/util/entityHelper.js",
+			"global": true
+		},
+		"BoxManager": {
+			"type": "script",
+			"path": "script/BoxManager.js",
+			"global": true
+		},
+		"timeHelper": {
+			"type": "script",
+			"path": "script/util/timeHelper.js",
+			"global": true
+		},
+		"NumberBox": {
+			"type": "script",
+			"path": "script/numberBox/NumberBox.js",
+			"global": true
+		},
+		"CalcCommand": {
+			"type": "script",
+			"path": "script/calcType/CalcCommand.js",
+			"global": true
+		},
+		"CalcPuzzle": {
+			"type": "script",
+			"path": "script/calcType/CalcPuzzle.js",
+			"global": true
+		},
+		"CalcTypeManager": {
+			"type": "script",
+			"path": "script/calcType/CalcTypeManager.js",
+			"global": true
+		},
+		"Maker": {
+			"type": "script",
+			"path": "script/makeNumbers/Maker.js",
+			"global": true
+		},
+		"StandardRule": {
+			"type": "script",
+			"path": "script/makeNumbers/StandardRule.js",
+			"global": true
+		},
+		"nicokaku": {
+			"type": "image",
+			"path": "image/nicokaku.png",
+			"width": 1024,
+			"height": 760
+		},
+		"nicokaku_glyphs": {
+			"type": "text",
+			"path": "text/nicokaku_glyphs.json"
+		},
+		"plus": {
+			"type": "image",
+			"path": "image/plus.png",
+			"width": 100,
+			"height": 100
+		},
+		"plus_active": {
+			"type": "image",
+			"path": "image/plus_active.png",
+			"width": 100,
+			"height": 100
+		},
+		"division": {
+			"type": "image",
+			"path": "image/division.png",
+			"width": 100,
+			"height": 100
+		},
+		"division_active": {
+			"type": "image",
+			"path": "image/division_active.png",
+			"width": 100,
+			"height": 100
+		},
+		"minus": {
+			"type": "image",
+			"path": "image/minus.png",
+			"width": 100,
+			"height": 100
+		},
+		"minus_active": {
+			"type": "image",
+			"path": "image/minus_active.png",
+			"width": 100,
+			"height": 100
+		},
+		"multi": {
+			"type": "image",
+			"path": "image/multi.png",
+			"width": 100,
+			"height": 100
+		},
+		"multi_active": {
+			"type": "image",
+			"path": "image/multi_active.png",
+			"width": 100,
+			"height": 100
+		},
+		"reset": {
+			"type": "image",
+			"path": "image/reset.png",
+			"width": 100,
+			"height": 100
+		},
+		"undo": {
+			"type": "image",
+			"path": "image/undo.png",
+			"width": 100,
+			"height": 100
+		},
+		"ipa": {
+			"type": "image",
+			"path": "image/ipa.png",
+			"width": 1024,
+			"height": 308
+		},
+		"ipa_glyphs": {
+			"type": "text",
+			"path": "text/ipa_glyphs.json"
+		},
+		"resolve": {
+			"type": "audio",
+			"path": "audio/resolve",
+			"systemId": "sound",
+			"duration": 1000
+		},
+		"bgm": {
+			"type": "audio",
+			"path": "audio/bgm",
+			"systemId": "music",
+			"duration": 69000
+		},
+		"game_end": {
+			"type": "audio",
+			"path": "audio/game_end",
+			"systemId": "sound",
+			"duration": 3097
+		}
+	},
+	"moduleMainScripts": {
+		"rx": "node_modules/rx/index.js"
+	},
+	"environment": {
+		"sandbox-runtime": "3",
+		"niconico": {
+			"supportedModes": [
+				"ranking"
+			],
+			"preferredSessionParameters": {
+				"totalTimeLimit": 90
+			}
+		}
+	},
+	"globalScripts": [
+		"node_modules/rx/dist/rx.all.js"
+	]
+}
