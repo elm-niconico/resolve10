@@ -1,12 +1,16 @@
 import {GameMainParameterObject, RPGAtsumaruWindow} from "./parameterObject";
-import {changeScene} from "./scenes/changeScene";
+import {changeScene, SceneType} from "./scenes/changeScene";
 
 
 export function main(param: GameMainParameterObject, window: RPGAtsumaruWindow): void {
     (async () => {
-        await changeScene("Game", param, window)
+        const change = async (type: SceneType) => {
+            await changeScene(type, param, window)
+        }
+        
+        await change("Game")
 
-        await changeScene("Scoreboards", param, window)
+        await change("Scoreboards")
     })()
 
 }
