@@ -25,7 +25,7 @@ export class BoxManager {
 
         this.createUndoBtn()
         const resetBtnTask = this.createResetBtn();
-        const completeTask = () => new Promise<"success">(async (resolve, reject) => {
+        const completeTask = () => new Promise<"10">(async (resolve, reject) => {
             for (let i = 0; i < this.boxes.length; i++) {
                 this.setBox(i, this.boxes[i], resolve)
             }
@@ -92,10 +92,10 @@ export class BoxManager {
         return boxes
     }
 
-    private setBox(sourceIndex: number, box: INumberBox, resolve: (message: "success") => void) {
+    private setBox(sourceIndex: number, box: INumberBox, resolve: (message: "10") => void) {
         if (this.isClear(box)) {
             getAudioById("resolve").play();
-            sleep(this.scene, 300).then(() => resolve("success"))
+            sleep(this.scene, 300).then(() => resolve("10"))
 
             return;
         }

@@ -92,8 +92,8 @@ const loopPuzzle = (scene: Scene, param: GameMainParameterObject) => new Promise
         const container = settingNumberBoxContainer(scene)
         const calc = new CalcPuzzle(scene, container, calcTypeManager);
         const boxManager = new BoxManager(scene, container, calc, nextPatterns)
-        const resetOrClear = await boxManager.placePuzzle()
-        if (resetOrClear == "success") {
+        const resetOrResolve10 = await boxManager.placePuzzle()
+        if (resetOrResolve10 == "10") {
             g.game.vars.gameState.score++;
             updateText(scoreLabel, g.game.vars.gameState.score.toString())
             nextPatterns = patternGenerator.makeNext()
