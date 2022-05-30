@@ -1,62 +1,57 @@
-import {createRect, Scene} from "./util/entityHelper"
+import {createFilledRect, createScene, Scene} from "../util/entityHelper"
 
 import {BoxManager} from "./BoxManager";
-import {CalcTypeManager} from "./calcType/CalcTypeManager";
-import {CalcPuzzle} from "./calcType/CalcPuzzle";
-import {fact} from "./makeNumbers/Maker";
-import {GameMainParameterObject} from "./parameterObject";
-import {sleep} from "./util/timeHelper";
+import {CalcTypeManager} from "../calcType/CalcTypeManager";
+import {CalcPuzzle} from "../calcType/CalcPuzzle";
+import {fact} from "../makeNumbers/Maker";
+import {GameMainParameterObject} from "../parameterObject";
+import {sleep} from "../util/timeHelper";
+import {IScene} from "./changeScene";
+import {createIpaBitmapFont, createLabel} from "../util/fontHelper";
 
-export const startGameScene = (param: GameMainParameterObject) => new Promise<void>((resolve, reject) => {
-    const scene = new g.Scene({
-        game: g.game,
-        local: true,
-        assetIds: [
-            "nicokaku",
-            "nicokaku_glyphs",
-            "plus",
-            "plus_active",
-            "minus",
-            "minus_active",
-            "multi",
-            "multi_active",
-            "division",
-            "division_active",
-            "undo",
-            "reset",
-            "ipa",
-            "ipa_glyphs",
-            "resolve",
-            "bgm",
-            "game_end"
-        ]
-    })
+export class Game implements IScene {
+    createScene(param: GameMainParameterObject): Scene {
+        return createScene({
+            game: g.game,
+            local: true,
+            assetIds: [
+                "nicokaku",
+                "nicokaku_glyphs",
+                "plus",
+                "plus_active",
+                "minus",
+                "minus_active",
+                "multi",
+                "multi_active",
+                "division",
+                "division_active",
+                "undo",
+                "reset",
+                "ipa",
+                "ipa_glyphs",
+                "resolve",
+                "bgm",
+                "game_end"
+            ]
+        })
+    }
 
-    scene.onLoad.add(() => {
-        (async () => {
-            const bgm = scene.asset.getAudioById("bgm")
-            bgm.play()
-            await game(scene, param)
-            scene.append(new g.FilledRect({
-                cssColor: "rgba(255,255,255,0)",
-                height: g.game.height,
-                scene,
-                touchable: true,
-                width: g.game.width,
-                x: 0,
-                y: 0
-            }))
+    async execute(scene: Scene, param: GameMainParameterObject): Promise<void> {
+        const bgm = scene.asset.getAudioById("bgm")
+        bgm.play()
+        await game(scene, param)
 
-            bgm.stop()
-            bgm.destroy()
-            scene.asset.getAudioById("game_end").play()
-            await sleep(scene, 3000)
-            resolve();
-        })()
-    })
+        scene.append(createDummyForeground(scene))
 
-    g.game.pushScene(scene)
-})
+        bgm.stop()
+        bgm.destroy()
+        scene.asset.getAudioById("game_end").play()
+        await sleep(scene, 3000)
+    }
+
+}
+
+
 const game = async (scene: Scene, param: GameMainParameterObject) => {
     g.game.vars.gameState = {score: 0};
     settingBackGround(scene)
@@ -110,7 +105,7 @@ const loopPuzzle = (scene: Scene, param: GameMainParameterObject) => new Promise
 
 
 const settingBackGround = (scene: Scene) => {
-    const backGround = createRect({
+    const backGround = createFilledRect({
         scene,
         width: scene.game.width,
         height: scene.game.height,
@@ -120,7 +115,7 @@ const settingBackGround = (scene: Scene) => {
 }
 
 const settingNumberBoxContainer = (scene: Scene) => {
-    const container = createRect({
+    const container = createFilledRect({
         scene,
         width: 500,
         height: g.game.height - 80 - 100,
@@ -133,17 +128,17 @@ const settingNumberBoxContainer = (scene: Scene) => {
 }
 
 const createTimerLabel = (scene: Scene, limitTime: number) => {
-    scene.append(new g.Label({
+    scene.append(createLabel({
         scene: scene,
-        font: createBitmapFont(),
+        font: createIpaBitmapFont(),
         text: "Time",
         fontSize: 60,
         x: 150,
         y: 20
     }))
-    return new g.Label({
+    return createLabel({
         scene: scene,
-        font: createBitmapFont(),
+        font: createIpaBitmapFont(),
         text: limitTime.toString(),
         fontSize: 70,
         x: 300,
@@ -152,17 +147,17 @@ const createTimerLabel = (scene: Scene, limitTime: number) => {
 }
 
 const createScoreLabel = (scene: Scene) => {
-    scene.append(new g.Label({
+    scene.append(createLabel({
         scene: scene,
-        font: createBitmapFont(),
+        font: createIpaBitmapFont(),
         text: "Score",
         fontSize: 60,
         x: 500,
         y: 20
     }))
-    return new g.Label({
+    return createLabel({
         scene: scene,
-        font: createBitmapFont(),
+        font: createIpaBitmapFont(),
         text: "0",
         fontSize: 70,
         x: 670,
@@ -178,16 +173,15 @@ const updateText = (label: g.Label, text: string) => {
 }
 
 
-const createBitmapFont = () => {
-    // 上で生成した nicokaku.png と nicokaku_glyphs.json に対応するアセットを取得
-    const fontAsset = g.game.scene().asset.getImageById("ipa");
-    const fontGlyphAsset = g.game.scene().asset.getTextById("ipa_glyphs");
-
-    const glyphInfo = JSON.parse(fontGlyphAsset.data);
-
-    return new g.BitmapFont({
-        src: fontAsset,
-        glyphInfo: glyphInfo,
-    });
+// タップ阻止用のダミーエンティティ
+const createDummyForeground = (scene: Scene) => {
+    return createFilledRect({
+        cssColor: "rgba(255,255,255,0)",
+        height: g.game.height,
+        scene,
+        touchable: true,
+        width: g.game.width,
+        x: 0,
+        y: 0
+    })
 }
-

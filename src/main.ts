@@ -1,26 +1,17 @@
 import {GameMainParameterObject, RPGAtsumaruWindow} from "./parameterObject";
-import {startGameScene} from "./game";
+import {changeScene} from "./scenes/changeScene";
 
 
 export declare const window: RPGAtsumaruWindow;
 
 export function main(param: GameMainParameterObject): void {
     (async () => {
-        await startGameScene(param)
+        await changeScene(param, "Game")
 
-        showRankingIfShould(param)
+        await changeScene(param, "Scoreboards")
     })()
 }
 
-const showRankingIfShould = (param: GameMainParameterObject) => {
-    // ゲームアツマール環境であればランキングを表示します
-    if (param.isAtsumaru) {
-        const boardId = 1;
-        window.RPGAtsumaru.experimental.scoreboards.setRecord(boardId, g.game.vars.gameState.score).then(function () {
-            window.RPGAtsumaru.experimental.scoreboards.display(boardId);
-        });
-    }
-}
 const sample = (param: GameMainParameterObject) => {
     const scene = new g.Scene({
         game: g.game,

@@ -37,19 +37,9 @@
 			"path": "script/parameterObject.js",
 			"global": true
 		},
-		"game": {
-			"type": "script",
-			"path": "script/game.js",
-			"global": true
-		},
 		"entityHelper": {
 			"type": "script",
 			"path": "script/util/entityHelper.js",
-			"global": true
-		},
-		"BoxManager": {
-			"type": "script",
-			"path": "script/BoxManager.js",
 			"global": true
 		},
 		"timeHelper": {
@@ -184,6 +174,61 @@
 			"path": "audio/game_end",
 			"systemId": "sound",
 			"duration": 3097
+		},
+		"changeScene": {
+			"type": "script",
+			"path": "script/scenes/changeScene.js",
+			"global": true
+		},
+		"ScoreBoard": {
+			"type": "script",
+			"path": "script/scenes/ScoreBoard.js",
+			"global": true
+		},
+		"Game": {
+			"type": "script",
+			"path": "script/scenes/Game.js",
+			"global": true
+		},
+		"createResetBtn": {
+			"type": "script",
+			"path": "script/resetBtn/createResetBtn.js",
+			"global": true
+		},
+		"ImageResetBtn": {
+			"type": "script",
+			"path": "script/resetBtn/ImageResetBtn.js",
+			"global": true
+		},
+		"TextResetBtn": {
+			"type": "script",
+			"path": "script/resetBtn/TextResetBtn.js",
+			"global": true
+		},
+		"BoxManager": {
+			"type": "script",
+			"path": "script/scenes/BoxManager.js",
+			"global": true
+		},
+		"fontHelper": {
+			"type": "script",
+			"path": "script/util/fontHelper.js",
+			"global": true
+		},
+		"createUndoBtn": {
+			"type": "script",
+			"path": "script/undoBtn/createUndoBtn.js",
+			"global": true
+		},
+		"ImageUndoBtn": {
+			"type": "script",
+			"path": "script/undoBtn/ImageUndoBtn.js",
+			"global": true
+		},
+		"TextUndoBtn": {
+			"type": "script",
+			"path": "script/undoBtn/TextUndoBtn.js",
+			"global": true
 		}
 	},
 	"moduleMainScripts": {
@@ -192,6 +237,14 @@
 	"environment": {
 		"sandbox-runtime": "3",
 		"niconico": {
+			"supportedModes": [
+				"ranking"
+			],
+			"preferredSessionParameters": {
+				"totalTimeLimit": 90
+			}
+		},
+		"nicolive": {
 			"supportedModes": [
 				"ranking"
 			],

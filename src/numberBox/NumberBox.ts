@@ -1,4 +1,4 @@
-import {createRect, Entity, Rect, Scene} from "../util/entityHelper";
+import {createFilledRect, Entity, Rect, Scene} from "../util/entityHelper";
 import {PointMoveEvent} from "@akashic/akashic-engine";
 
 export interface NumberBoxStructure {
@@ -43,7 +43,7 @@ export class NumberBox implements INumberBox {
 
 
     private toEntity(scene: Scene, container: Entity, x: number, y: number): g.E {
-        const numberBox = createRect({
+        const numberBox = createFilledRect({
             cssColor: "#6395ff",
             width: 100,
             height: 100,

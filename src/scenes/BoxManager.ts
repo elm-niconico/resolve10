@@ -1,7 +1,9 @@
-import {createSprite, Entity, getAudioById, getImageById, Scene} from "./util/entityHelper";
-import {isNumber, sleep} from "./util/timeHelper";
-import {INumberBox, NumberBox} from "./numberBox/NumberBox";
-import {CalcPuzzle} from "./calcType/CalcPuzzle";
+import {Entity, getAudioById, Scene} from "../util/entityHelper";
+import {isNumber, sleep} from "../util/timeHelper";
+import {INumberBox, NumberBox} from "../numberBox/NumberBox";
+import {CalcPuzzle} from "../calcType/CalcPuzzle";
+import {createResetBtn} from "../resetBtn/createResetBtn";
+import {createUndoBtn} from "../undoBtn/createUndoBtn";
 
 export class BoxManager {
 
@@ -43,12 +45,11 @@ export class BoxManager {
 
 
     private createResetBtn() {
-        const reset = createSprite({
+        const reset = createResetBtn("Text", {
             scene: this.scene,
             width: 100,
             height: 100,
             touchable: true,
-            src: getImageById("reset"),
             x: 680,
             y: 250
         })
@@ -57,19 +58,17 @@ export class BoxManager {
         this.scene.append(reset)
         return () => new Promise<"reset">((resolve) => {
             reset.onPointDown.add(() => {
-
                 resolve("reset")
             })
         })
     }
 
     private createUndoBtn() {
-        const undo = createSprite({
+        const undo = createUndoBtn("Text", {
             scene: this.scene,
             width: 100,
             height: 100,
             touchable: true,
-            src: getImageById("undo"),
             x: 680,
             y: 100
         })
