@@ -231,19 +231,8 @@
 			"global": true
 		}
 	},
-	"moduleMainScripts": {
-		"rx": "node_modules/rx/index.js"
-	},
 	"environment": {
 		"sandbox-runtime": "3",
-		"niconico": {
-			"supportedModes": [
-				"ranking"
-			],
-			"preferredSessionParameters": {
-				"totalTimeLimit": 90
-			}
-		},
 		"nicolive": {
 			"supportedModes": [
 				"ranking"
@@ -252,8 +241,5 @@
 				"totalTimeLimit": 90
 			}
 		}
-	},
-	"globalScripts": [
-		"node_modules/rx/dist/rx.all.js"
-	]
+	}
 }
