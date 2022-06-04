@@ -12,6 +12,7 @@
     "update": "akashic-cli-scan asset && akashic-cli-scan globalScripts",
     "lint": "eslint -c .eslintrc.js \"src/**/*.ts\" --fix",
     "start": "akashic-sandbox .",
+    "multi": " akashic serve --target-service nicolive",
     "export-zip": "rimraf game.zip && akashic-cli-export zip -o game.zip -s",
     "export-html": "rimraf ./resolve10.zip && akashic-cli-export html -o ./resolve10.zip --atsumaru",
     "test": "jest"

@@ -229,6 +229,11 @@
 			"type": "script",
 			"path": "script/undoBtn/TextUndoBtn.js",
 			"global": true
+		},
+		"mathHelper": {
+			"type": "script",
+			"path": "script/util/mathHelper.js",
+			"global": true
 		}
 	},
 	"environment": {

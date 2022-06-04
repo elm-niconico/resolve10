@@ -1,4 +1,5 @@
 import {INumbersMaker} from "./Maker";
+import {random, ShareType} from "../util/mathHelper";
 
 export class StandardRule implements INumbersMaker {
     private readonly indexCache: number[] = []
@@ -7,11 +8,11 @@ export class StandardRule implements INumbersMaker {
         const i = this.waitForCreateIndex()
 
         this.indexCache.push(i)
-        return shuffle(patterns[i])
+        return shuffle(patterns[i], "Global")
     }
 
     private waitForCreateIndex(): number {
-        const num = g.game.localRandom.generate() * patterns.length
+        const num = random("Global") * patterns.length
         const i = Math.floor(num)
         if (this.indexCache.some(s => s == i))
             return this.waitForCreateIndex()
@@ -19,9 +20,9 @@ export class StandardRule implements INumbersMaker {
     }
 }
 
-const shuffle = ([...array]) => {
+const shuffle = ([...array], type: ShareType) => {
     for (let i = array.length - 1; i >= 0; i--) {
-        const j = Math.floor(g.game.localRandom.generate() * (i + 1));
+        const j = Math.floor(random(type) * (i + 1));
         [array[i], array[j]] = [array[j], array[i]];
     }
     return array;
