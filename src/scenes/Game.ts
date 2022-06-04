@@ -3,7 +3,7 @@ import {createFilledRect, createScene, Scene} from "../util/entityHelper"
 import {BoxManager} from "./BoxManager";
 import {CalcTypeManager} from "../calcType/CalcTypeManager";
 import {CalcPuzzle} from "../calcType/CalcPuzzle";
-import {fact} from "../makeNumbers/Maker";
+import {factPatternGenerator, INumbersMaker} from "../makeNumbers/Maker";
 import {GameMainParameterObject} from "../parameterObject";
 import {sleep} from "../util/timeHelper";
 import {IScene} from "./changeScene";
@@ -31,7 +31,8 @@ export class Game implements IScene {
                 "ipa_glyphs",
                 "resolve",
                 "bgm",
-                "game_end"
+                "game_end",
+                "pass"
             ]
         })
     }
@@ -57,7 +58,6 @@ const game = async (scene: Scene, param: GameMainParameterObject) => {
     settingBackGround(scene)
 
     await loopPuzzle(scene, param)
-
 }
 
 const loopPuzzle = (scene: Scene, param: GameMainParameterObject) => new Promise<void>(async (resolve) => {
@@ -86,23 +86,29 @@ const loopPuzzle = (scene: Scene, param: GameMainParameterObject) => new Promise
     scene.onUpdate.add(updateHandler)
 
     const calcTypeManager = new CalcTypeManager(scene)
-    const patternGenerator = fact("Standard")
+    const patternGenerator = factPatternGenerator("Standard")
     let nextPatterns = patternGenerator.makeNext()
     while (timer > 0) {
         const container = settingNumberBoxContainer(scene)
         const calc = new CalcPuzzle(scene, container, calcTypeManager);
         const boxManager = new BoxManager(scene, container, calc, nextPatterns)
-        const resetOrResolve10 = await boxManager.placePuzzle()
-        if (resetOrResolve10 == "10") {
-            g.game.vars.gameState.score++;
-            updateText(scoreLabel, g.game.vars.gameState.score.toString())
-            nextPatterns = patternGenerator.makeNext()
-        }
-        scene.remove(container)
 
+        const puzzleResult = await boxManager.placePuzzle()
+        if (puzzleResult == "10") {
+            nextPatterns = update(patternGenerator, scoreLabel, 1)
+        } else if (puzzleResult == "pass") {
+            nextPatterns = update(patternGenerator, scoreLabel, -1)
+        }
+
+        scene.remove(container)
     }
 })
 
+const update = (patternGenerator: INumbersMaker, scoreLabel: g.Label, addScore: number) => {
+    g.game.vars.gameState.score += addScore;
+    updateText(scoreLabel, g.game.vars.gameState.score.toString())
+    return patternGenerator.makeNext()
+}
 
 const settingBackGround = (scene: Scene) => {
     const backGround = createFilledRect({
@@ -120,8 +126,8 @@ const settingNumberBoxContainer = (scene: Scene) => {
         width: 500,
         height: g.game.height - 80 - 100,
         cssColor: "#f5efe9",
-        x: 150,
-        y: 90
+        x: 200,
+        y: 130
     })
     scene.append(container)
     return container
@@ -132,17 +138,17 @@ const createTimerLabel = (scene: Scene, limitTime: number) => {
         scene: scene,
         font: createIpaBitmapFont(),
         text: "Time",
-        fontSize: 60,
-        x: 150,
-        y: 20
+        fontSize: 55,
+        x: 200,
+        y: 30
     }))
     return createLabel({
         scene: scene,
         font: createIpaBitmapFont(),
         text: limitTime.toString(),
-        fontSize: 70,
-        x: 300,
-        y: 10
+        fontSize: 60,
+        x: 335,
+        y: 27
     })
 }
 
@@ -151,17 +157,17 @@ const createScoreLabel = (scene: Scene) => {
         scene: scene,
         font: createIpaBitmapFont(),
         text: "Score",
-        fontSize: 60,
-        x: 500,
-        y: 20
+        fontSize: 55,
+        x: 470,
+        y: 30
     }))
     return createLabel({
         scene: scene,
         font: createIpaBitmapFont(),
         text: "0",
-        fontSize: 70,
-        x: 670,
-        y: 15
+        fontSize: 60,
+        x: 630,
+        y: 27
     })
 }
 

@@ -45,8 +45,8 @@ export class NumberBox implements INumberBox {
     private toEntity(scene: Scene, container: Entity, x: number, y: number): g.E {
         const numberBox = createFilledRect({
             cssColor: "#6395ff",
-            width: 100,
-            height: 100,
+            width: 150,
+            height: 150,
             touchable: true,
             x,
             y,
@@ -87,11 +87,11 @@ const setLabel = (numberBox: Entity, scene: Scene, num: number) => {
         scene: scene,
         font: createBitmapFont(),
         text: num.toString(),
-        fontSize: 57,
+        fontSize: 65,
         y: (numberBox.height / 2) - 30,
         textAlign: "center",
-        height: 100,
-        width: 100, // 中央寄せに使う描画の幅
+        height: 150,
+        width: 150, // 中央寄せに使う描画の幅
         widthAutoAdjust: false // 幅を自動で更新しない
     });
     numberBox.append(label)

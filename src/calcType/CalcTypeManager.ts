@@ -16,73 +16,55 @@ export class CalcTypeManager {
     }
 
     settingsCalcTypeBoxes(scene: Scene) {
-        const height = 100
-        const width = 100
 
-        const x = 20;
 
         const thunkNextY = () => {
+            const height = 120
             let count = 0;
             const margin = 50;
 
-            return () => 80 + (count++ * (height + margin))
+            return () => 30 + (count++ * (height + margin))
         }
         const nextY = thunkNextY();
 
 
-        const plus = createSprite({
-            scene,
-            width: 100,
-            height: 100,
-            src: getImageById("plus_active"),
-            touchable: true,
-            x: 20,
-            y: nextY()
-        })
+        const plus = this.createCalcTypeBox(nextY, "plus_active")
         plus.onPointDown.add(() => {
             this.setCalcType("Plus")
         })
-        const minus = createSprite({
-            scene,
-            width,
-            height,
-            touchable: true,
-            src: getImageById("minus"),
-            x,
-            y: nextY()
-        })
+
+        const minus = this.createCalcTypeBox(nextY, "minus")
         minus.onPointDown.add(() => {
             this.setCalcType("Minus")
         })
-        const multi = createSprite({
-            scene,
-            width,
-            height,
-            touchable: true,
-            src: getImageById("multi"),
-            x,
-            y: nextY()
-        })
+
+        const multi = this.createCalcTypeBox(nextY, "multi")
         multi.onPointDown.add(() => {
             this.setCalcType("Multi")
         })
-        const division = createSprite({
-            scene,
-            width,
-            height,
-            touchable: true,
-            src: getImageById("division"),
-            x,
-            y: nextY()
-        })
+
+        const division = this.createCalcTypeBox(nextY, "division")
         division.onPointDown.add(() => {
             this.setCalcType("Division")
         })
+
         this._typeBoxes.push(["Plus", plus], ["Minus", minus], ["Multi", multi], ["Division", division])
         scene.append(plus)
         scene.append(minus)
         scene.append(multi)
         scene.append(division)
+    }
+
+    private createCalcTypeBox(nextY: () => number, assetId: string) {
+        return createSprite({
+            scene: this.scene,
+            width: 120,
+            height: 120,
+            src: getImageById(assetId),
+            touchable: true,
+            x: 20,
+            y: nextY()
+        })
     }
 
     private setCalcType(type: CalcType) {

@@ -3,6 +3,13 @@ import {CalcType} from "./CalcTypeManager";
 import {Entity, Scene} from "../util/entityHelper";
 
 
+export interface ICalcCommand {
+    do(): INumberBox;
+
+    undo(): void;
+}
+
+
 export class CalcCommand {
     private source: [number, INumberBox];
     private collision: [number, INumberBox];
@@ -12,22 +19,25 @@ export class CalcCommand {
         private readonly scene: Scene,
         private readonly container: Entity,
         private readonly calcType: CalcType,
-        private readonly boxes: (INumberBox | null)[]) {
+        private readonly boxes: (INumberBox | null)[],
+        private readonly sourceIndex: number,
+        private readonly collisionIndex: number
+    ) {
     }
 
-    do(sourceIndex: number, collisionIndex: number) {
+    do() {
 
-        const collideBox = this.boxes[collisionIndex]
-        const sourceBox = this.boxes[sourceIndex]
+        const collideBox = this.boxes[this.collisionIndex]
+        const sourceBox = this.boxes[this.sourceIndex]
         const calcBox = this.createCalcBox(sourceBox, collideBox)
 
-        this.source = [sourceIndex, sourceBox]
-        this.collision = [collisionIndex, collideBox]
-        this.calcBox = [collisionIndex, calcBox]
+        this.source = [this.sourceIndex, sourceBox]
+        this.collision = [this.collisionIndex, collideBox]
+        this.calcBox = [this.collisionIndex, calcBox]
 
 
-        this.boxes[sourceIndex] = null
-        this.boxes[collisionIndex] = null
+        this.boxes[this.sourceIndex] = null
+        this.boxes[this.collisionIndex] = null
 
         this.container.remove(collideBox.entity)
         this.container.remove(sourceBox.entity)

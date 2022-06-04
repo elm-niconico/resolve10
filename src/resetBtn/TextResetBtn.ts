@@ -12,7 +12,7 @@ export class TextResetBtn implements IResetBtn {
             textColor: "#000000",
             fontSize: 37,
             y: baseParam.height / 2 - 18,
-            x: 5,
+            x: 15,
             textAlign: "center",
             scene: baseParam.scene,
             text: "reset",

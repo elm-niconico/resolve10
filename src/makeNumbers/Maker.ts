@@ -12,7 +12,7 @@ export interface INumbersMaker {
  * Standard = 基本ルールで解ける組の生成
  */
 export type Rule = "Standard"
-export const fact = (type: Rule) => {
+export const factPatternGenerator = (type: Rule) => {
     switch (type) {
         case "Standard":
             return new StandardRule()

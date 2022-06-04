@@ -90,50 +90,50 @@
 		"plus": {
 			"type": "image",
 			"path": "image/plus.png",
-			"width": 100,
-			"height": 100
+			"width": 130,
+			"height": 130
 		},
 		"plus_active": {
 			"type": "image",
 			"path": "image/plus_active.png",
-			"width": 100,
-			"height": 100
+			"width": 130,
+			"height": 130
 		},
 		"division": {
 			"type": "image",
 			"path": "image/division.png",
-			"width": 100,
-			"height": 100
+			"width": 130,
+			"height": 130
 		},
 		"division_active": {
 			"type": "image",
 			"path": "image/division_active.png",
-			"width": 100,
-			"height": 100
+			"width": 130,
+			"height": 130
 		},
 		"minus": {
 			"type": "image",
 			"path": "image/minus.png",
-			"width": 100,
-			"height": 100
+			"width": 130,
+			"height": 130
 		},
 		"minus_active": {
 			"type": "image",
 			"path": "image/minus_active.png",
-			"width": 100,
-			"height": 100
+			"width": 130,
+			"height": 130
 		},
 		"multi": {
 			"type": "image",
 			"path": "image/multi.png",
-			"width": 100,
-			"height": 100
+			"width": 130,
+			"height": 130
 		},
 		"multi_active": {
 			"type": "image",
 			"path": "image/multi_active.png",
-			"width": 100,
-			"height": 100
+			"width": 130,
+			"height": 130
 		},
 		"reset": {
 			"type": "image",
@@ -234,6 +234,27 @@
 			"type": "script",
 			"path": "script/util/mathHelper.js",
 			"global": true
+		},
+		"createPassBtn": {
+			"type": "script",
+			"path": "script/passBtn/createPassBtn.js",
+			"global": true
+		},
+		"pass": {
+			"type": "audio",
+			"path": "audio/pass",
+			"systemId": "sound",
+			"duration": 1098
+		},
+		"createAllBtn": {
+			"type": "script",
+			"path": "script/allBtn/createAllBtn.js",
+			"global": true
+		},
+		"AllCalcCommand": {
+			"type": "script",
+			"path": "script/calcType/AllCalcCommand.js",
+			"global": true
 		}
 	},
 	"environment": {
@@ -246,5 +267,6 @@
 				"totalTimeLimit": 90
 			}
 		}
-	}
+	},
+	"globalScripts": []
 }

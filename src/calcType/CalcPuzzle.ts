@@ -1,10 +1,9 @@
-import {CalcCommand} from "./CalcCommand";
+import {ICalcCommand} from "./CalcCommand";
 import {CalcTypeManager} from "./CalcTypeManager";
-import {INumberBox} from "../numberBox/NumberBox";
 import {Entity, Scene} from "../util/entityHelper";
 
 export class CalcPuzzle {
-    private calcCommands: CalcCommand[] = []
+    private calcCommands: ICalcCommand[] = []
 
     get calcType() {
         return this.calcTypeManager.calcType
@@ -18,15 +17,10 @@ export class CalcPuzzle {
     }
 
 
-    calc(boxes: (INumberBox | null)[], sourceIndex: number, collideIndex: number) {
-        const command = new CalcCommand(
-            this.scene,
-            this.container,
-            this.calcTypeManager.calcType,
-            boxes
-        )
+    calc(command: ICalcCommand) {
+
         this.calcCommands.push(command)
-        return command.do(sourceIndex, collideIndex)
+        return command.do()
     }
 
     undo() {
